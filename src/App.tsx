@@ -1,23 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Circle } from 'react-shapes';
+import { Ellipse } from 'react-shapes';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Circle r={200} fill={{color: '#19F1EB'}} stroke={{color:'#22D8D3'}} strokeWidth={35} />
+       
+       <h1>React-Shape!</h1>
       </header>
     </div>
   );

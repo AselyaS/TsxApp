@@ -5,9 +5,10 @@ import { Ellipse } from 'react-shapes';
 import Circle2 from './components/Circle2';
 import { Slider } from '@rmwc/slider';
 import '@material/slider/dist/mdc.slider.css';
+import store from "./store"
 
-function App() {
-  const [radius, setRadius] =useState(150)
+function App({ state }: { state: any}) {
+  const {radius} = state
   return (
     <div className="App">
       <header className="App-header">
@@ -19,7 +20,7 @@ function App() {
          onInput={(event) => {
           const newRadius = event.detail.value
 
-          setRadius(newRadius)
+          store.dispatch({type: 'SET_CIRCLE_RADIUS', payload: newRadius})
         }}
         />
         </div>

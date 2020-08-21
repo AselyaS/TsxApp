@@ -1,46 +1,35 @@
 import React, { useState } from 'react';
-import './App.css';
-import { Circle } from 'react-shapes';
-import { Ellipse } from 'react-shapes';
-import Circle2 from './components/Circle2';
+import store from "./store";
 import { Slider } from '@rmwc/slider';
 import '@material/slider/dist/mdc.slider.css';
-import store from "./store"
-
-function App({ state }: { state: any}) {
-  const {radius} = state
+import './App.css';
+function App({ state }: { state: any }) {
+  const [width, setWidth] = useState(100)
+  const [height, setHeight] = useState(500)
+  console.log("render!")
+  const { radius } = state
+  const handleClick = () => {
+    const newWidth = Math.floor((Math.random() * 400) + 100)
+    const newHeight = Math.floor((Math.random() * 400) + 100)
+    setWidth(newWidth)
+    setHeight(newHeight)
+  }
   return (
     <div className="App">
       <header className="App-header">
         <div className="App-controls">
-        {radius}
-          {/* <className = "App-Circle1"> */}
-          
-        <Slider className= "circle-slider" min={20} max={200} value={radius} discrete step={1} 
-         onInput={(event) => {
-          const newRadius = event.detail.value
-
-          store.dispatch({type: 'SET_CIRCLE_RADIUS', payload: newRadius})
-        }}
-        />
+          {radius}
+          <Slider className="circle-slider" min={20} max={500} value={radius} discrete step={1}
+            onInput={(event) => {
+              const newRadius = event.detail.value
+              store.dispatch({ type: 'SET_CIRCLE_RADIUS', payload: newRadius })
+            }}
+          />
+          <button onClick={handleClick}>Get a Bill Murray!</button>
+          <img src={`https://www.fillmurray.com/${width}/${height}`} alt="Bill Murray!" />
         </div>
-        <div>
-  
-        <Circle r={radius} fill={{color: '#19F1EB'}} stroke={{color:'#22D8D3'}} strokeWidth={35} />
-        </div>
-        </header>
-        {/* <div
-           className = "App-Circle2"  
-        > 
-          <Circle2 />
-        </div>
-       */}
-        
-       
-       <h1>React-Shape!</h1>
-    
+      </header>
     </div>
   );
 }
-
 export default App;

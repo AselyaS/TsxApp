@@ -4,7 +4,7 @@ import { Slider } from '@rmwc/slider';
 import '@material/slider/dist/mdc.slider.css';
 import './App.css';
 function App({ state }: { state: any }) {
-  const [width, setWidth] = useState(100)
+  const [width, setWidth] = useState(500)
   const [height, setHeight] = useState(500)
   console.log("render!")
   const { radius } = state
@@ -25,8 +25,8 @@ function App({ state }: { state: any }) {
               store.dispatch({ type: 'SET_CIRCLE_RADIUS', payload: newRadius })
             }}
           />
-          <button onClick={handleClick}>Get a Bill Murray!</button>
-          <img src={`https://www.fillmurray.com/${width}/${height}`} alt="Bill Murray!" />
+          <button onClick={handleClick}>Cheese!</button>
+          <img src={`https://images.unsplash.com/profile-1449546653256-0faea3006d34?i${width}/${height}`} alt="Cheese!" />
         </div>
       </header>
     </div>

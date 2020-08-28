@@ -5,17 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from "./store"
 
-const render = () => ReactDOM.render(
+ReactDOM.render(
   <React.StrictMode>
-    <App state = {store.getState()}/>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-store.subscribe(() => {
-  render()
-})
-render()
 
 
 

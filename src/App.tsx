@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Circle } from 'react-shapes';
-import { Ellipse } from 'react-shapes';
-import Circle2 from './components/Circle2';
-import { Slider } from '@rmwc/slider';
-import '@material/slider/dist/mdc.slider.css';
-import store from "./store"
-
 type Pokemon = {
   name: string
   id: number
@@ -21,14 +14,33 @@ function App() {
   const handleInput: React.FormEventHandler<HTMLInputElement> = (event) => {
     setInput(event.currentTarget.value)
   }
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     // Take current 'input' and submit to API
-    const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${input}`)
-    const pokemonJsObj = await pokemonResponse.json()
-    setPokemon(pokemonJsObj)
-    console.log("pokemon: ", pokemonJsObj)
+    fetch(`https://pokeapi.co/api/v2/pokemon/${input}`)
+      .then((pokemonResponse) => {
+        console.log("response status: ", pokemonResponse.status)
+        if (pokemonResponse.status === 404) {
+          console.error("Pokemon not found!")
+        } else {
+          pokemonResponse.json().then((pokemonJsObj) => {
+            setPokemon(pokemonJsObj)
+            console.log("pokemon: ", pokemonJsObj)
+          }).catch((error) => {
+            console.error("Json error that we caught: ", error)
+          })
+        }
+      })
+      .catch((error) => {
+        console.error("Network error: ", error)
+      })
   }
-
+  // const handleSubmit = async () => {
+  //   // Take current 'input' and submit to API
+  //   const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${input}`)
+  //   const pokemonJsObj = await pokemonResponse.json()
+  //   setPokemon(pokemonJsObj)
+  //   console.log("pokemon: ", pokemonJsObj)
+  // }
   return (
     <div className="App">
       <header className="App-header">
